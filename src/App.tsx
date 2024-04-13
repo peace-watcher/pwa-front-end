@@ -1,5 +1,11 @@
-function App() {
-  return <>하이</>;
-}
+import { GlobalStyle } from "./style/globalStyle";
+import Home from "./Home";
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <GlobalStyle />
+      <Home />
+    </>
+  );
+}
