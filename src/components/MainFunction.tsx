@@ -46,7 +46,7 @@ function MainFunction() {
       {IconList.map((icon, idx: number) => {
         return (
           <StFunctionBoxWrapper key={IconDescList[idx]}>
-            {icon}
+            {/* {icon} */}
             {IconDescList[idx]}
           </StFunctionBoxWrapper>
         );
