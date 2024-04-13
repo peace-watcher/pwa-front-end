@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid } from "../assets/index";
+// import { IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid } from "../assets/index";
 
 import { useEffect, useState } from "react";
 import { registerServiceWorker } from "../utils/notification";
@@ -38,19 +38,19 @@ function MainFunction() {
     deviceToken?.token !== "" && deviceToken?.token !== undefined && postDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
-  const IconList = [<IcMap />, <IcCallPolice />, <IcMyFile />, <IcFingerPrint />, <IcSearchKid />, <IcMissingKid />];
-  const IconDescList = ["지문사전등록", "실종아동신고", "실종아동찾기", "범죄신고", "내정보 저장", "생활안전지도"];
+  // const IconList = [IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid];
+  // const IconDescList = ["지문사전등록", "실종아동신고", "실종아동찾기", "범죄신고", "내정보 저장", "생활안전지도"];
 
   return (
     <StMainFunctionWrapper>
-      {IconList.map((icon, idx: number) => {
+      {/* {IconList.map((icon: SVGSVGElement, idx: number) => {
         return (
           <StFunctionBoxWrapper key={IconDescList[idx]}>
-            {/* {icon} */}
+            {icon}
             {IconDescList[idx]}
           </StFunctionBoxWrapper>
         );
-      })}
+      })} */}
     </StMainFunctionWrapper>
   );
 }
@@ -69,20 +69,20 @@ const StMainFunctionWrapper = styled.section`
   background-color: #fff;
 `;
 
-const StFunctionBoxWrapper = styled.article`
-  display: flex;
-  flex-direction: column;
-  algin-items: center;
-  justify-content: center;
-  gap: 2rem;
+// const StFunctionBoxWrapper = styled.article`
+//   display: flex;
+//   flex-direction: column;
+//   algin-items: center;
+//   justify-content: center;
+//   gap: 2rem;
 
-  width: 12rem;
-  height: 10rem;
+//   width: 12rem;
+//   height: 10rem;
 
-  box-shadow: 0px 4px 4px 0px #000000;
+//   box-shadow: 0px 4px 4px 0px #000000;
 
-  border-radius: 2rem;
-  background-color: #fff;
-`;
+//   border-radius: 2rem;
+//   background-color: #fff;
+// `;
 
 export default MainFunction;
