@@ -7,12 +7,12 @@ import svgr from "@svgr/rollup";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
-  build: {
-    rollupOptions: {
-      input: {
-        main: "./index.html",
-        sw: "./public/firebase-messaging-sw.js",
-      },
-    },
-  },
+  // build: {
+  //   rollupOptions: {
+  //     input: {
+  //       main: "./index.html",
+  //       sw: "./public/firebase-messaging-sw.js",
+  //     },
+  //   },
+  // },
 });
