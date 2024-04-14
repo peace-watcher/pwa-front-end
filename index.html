@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- <script>
+    <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("/firebase-messaging-sw.js")
@@ -18,10 +18,18 @@
           .catch((error) => {
             console.log("Service worker registration failed:", error);
           });
+        navigator.serviceWorker
+          .register("/service-worker.js", { scope: "./" })
+          .then((registration) => {
+            console.log("General service worker registration succeeded:", registration);
+          })
+          .catch((error) => {
+            console.log("General service worker registration failed:", error);
+          });
       } else {
         console.log("Service workers are not supported.");
       }
-    </script> -->
+    </script>
     <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
