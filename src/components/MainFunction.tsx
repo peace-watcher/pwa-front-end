@@ -13,6 +13,7 @@ function MainFunction() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
+  const [isAllowNotification, setIsAllowNotification] = useState<boolean>(false);
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
@@ -39,32 +40,41 @@ function MainFunction() {
     deviceToken?.token !== "" && deviceToken?.token !== undefined && postDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
+  useEffect(() => {
+    if (Notification.permission === "granted") {
+      setIsAllowNotification(true);
+    }
+  }, [Notification.permission]);
+
   // const IconList = [<IcMap />, <IcCallPolice />, <IcMyFile />, <IcFingerPrint />, <IcSearchKid />, <IcMissingKid />];
   const IconList = [IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid];
   const IconDescList = ["지문사전등록", "실종아동신고", "실종아동찾기", "범죄신고", "내정보 저장", "생활안전지도"];
 
   return (
-    <StMainFunctionWrapper>
-      {IconList.map((Icon, idx: number) => {
-        return (
-          <StFunctionBoxWrapper key={IconDescList[idx]}>
-            <img src={Icon} />
-            {IconDescList[idx]}
-          </StFunctionBoxWrapper>
-        );
-      })}
-    </StMainFunctionWrapper>
+    <>
+      <StMainFunctionWrapper>
+        {isAllowNotification && <h1>허용됨 알림!!</h1>}
+        {deviceToken.token && <h1>토큰: {deviceToken.token}</h1>}
+        {IconList.map((Icon, idx: number) => {
+          return (
+            <StFunctionBoxWrapper key={IconDescList[idx]}>
+              <img src={Icon} />
+              {IconDescList[idx]}
+            </StFunctionBoxWrapper>
+          );
+        })}
+      </StMainFunctionWrapper>
+    </>
   );
 }
 
 const StMainFunctionWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  algin-items: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
   padding: 1rem;
-\
   width: 29rem;
   height: 37.3rem;
   margin-top: 2.5rem;
