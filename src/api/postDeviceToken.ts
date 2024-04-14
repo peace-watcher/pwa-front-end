@@ -1,16 +1,16 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "http://3.34.74.202",
+  baseURL: "https://peacewatcher.shop/alert/",
   headers: {
     "Content-type": "application/json",
-    "Access-Control-Allow-Origin": "http://3.34.74.202",
+    "Access-Control-Allow-Origin": "https://peacewatcher.shop/alert/",
   },
 });
 
 export const postDeviceToken = async (token: string) => {
   try {
-    const response = await client.post(`/send`, token);
+    const response = await client.post(`/add`, token);
     console.log(response);
     return location;
   } catch (error) {
