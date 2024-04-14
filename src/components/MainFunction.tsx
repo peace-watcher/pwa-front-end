@@ -8,12 +8,25 @@ import { getToken } from "firebase/messaging";
 import { AppCheckTokenResult } from "firebase/app-check";
 
 import { postDeviceToken } from "../api/postDeviceToken";
+import { useGeoLocation } from "../hooks/useGeoLocation";
 
 function MainFunction() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
   const [isAllowNotification, setIsAllowNotification] = useState<boolean>(false);
+
+  // 위치정보
+
+  const geolocationOptions = {
+    enableHighAccuracy: true,
+    timeout: 1000 * 10,
+    maximumAge: 1000 * 3600 * 24,
+  };
+
+  const { location, error } = useGeoLocation(geolocationOptions);
+
+  console.log(location, error);
 
   // async function handleAllowNotification() {
   //   if (!("serviceWorker" in navigator)) {
