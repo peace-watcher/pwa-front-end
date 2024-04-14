@@ -16,6 +16,15 @@ function MainFunction() {
   const [isAllowNotification, setIsAllowNotification] = useState<boolean>(false);
 
   async function handleAllowNotification() {
+    if (!("serviceWorker" in navigator)) {
+      alert("서비스 워커를 지원하지 않는 브라우저입니다.");
+      return;
+    }
+    const registration = await navigator.serviceWorker.ready;
+    if (!("pushManager" in registration)) {
+      alert("푸시 알림을 지원하지 않는 브라우저입니다.");
+      return;
+    }
     const permission = await Notification.requestPermission();
     console.log(permission);
     console.log("토큰", deviceToken.token);
