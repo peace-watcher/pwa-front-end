@@ -11,7 +11,7 @@ const client = axios.create({
 export const postDeviceToken = async (token: string) => {
   try {
     const response = await client.post(`/add`, token);
-    console.log(response);
+    console.log("결과", response);
     return location;
   } catch (error) {
     console.error(error);

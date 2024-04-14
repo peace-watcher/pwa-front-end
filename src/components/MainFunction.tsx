@@ -17,6 +17,7 @@ function MainFunction() {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
     console.log(permission);
+    console.log("토큰", deviceToken.token);
 
     registerServiceWorker();
 
