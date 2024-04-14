@@ -21,7 +21,6 @@ const StHomeWraper = styled.main`
   width: 100%;
   height: 100vh;
 
-  border: 1px solid red;
   background: linear-gradient(to bottom, #6072c6 20%, #cfdefb 80%);
 `;
 
