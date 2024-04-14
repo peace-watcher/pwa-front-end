@@ -20,7 +20,7 @@ export default defineConfig({
         theme_color: "#ffffff",
         background_color: "#ffffff",
         dir: "ltr",
-        start_url: ".",
+        start_url: "/index.html",
         display: "standalone",
         orientation: "any",
         scope: "/",
