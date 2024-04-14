@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import { IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid } from "../assets/index";
+import { IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid } from "../assets/index";
 
 import { useEffect, useState } from "react";
 import { registerServiceWorker } from "../utils/notification";
@@ -39,19 +39,20 @@ function MainFunction() {
     deviceToken?.token !== "" && deviceToken?.token !== undefined && postDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
-  // const IconList = [IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid];
-  // const IconDescList = ["지문사전등록", "실종아동신고", "실종아동찾기", "범죄신고", "내정보 저장", "생활안전지도"];
+  // const IconList = [<IcMap />, <IcCallPolice />, <IcMyFile />, <IcFingerPrint />, <IcSearchKid />, <IcMissingKid />];
+  const IconList = [IcMap, IcCallPolice, IcMyFile, IcFingerPrint, IcSearchKid, IcMissingKid];
+  const IconDescList = ["지문사전등록", "실종아동신고", "실종아동찾기", "범죄신고", "내정보 저장", "생활안전지도"];
 
   return (
     <StMainFunctionWrapper>
-      {/* {IconList.map((icon: SVGSVGElement, idx: number) => {
+      {IconList.map((Icon, idx: number) => {
         return (
           <StFunctionBoxWrapper key={IconDescList[idx]}>
-            {icon}
+            <img src={Icon} />
             {IconDescList[idx]}
           </StFunctionBoxWrapper>
         );
-      })} */}
+      })}
     </StMainFunctionWrapper>
   );
 }
@@ -61,6 +62,8 @@ const StMainFunctionWrapper = styled.section`
   flex-direction: column;
   algin-items: center;
   flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1rem;
 \
   width: 29rem;
   height: 37.3rem;
@@ -70,20 +73,25 @@ const StMainFunctionWrapper = styled.section`
   background-color: #fff;
 `;
 
-// const StFunctionBoxWrapper = styled.article`
-//   display: flex;
-//   flex-direction: column;
-//   algin-items: center;
-//   justify-content: center;
-//   gap: 2rem;
+const StFunctionBoxWrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
-//   width: 12rem;
-//   height: 10rem;
+  width: 12rem;
+  height: 10rem;
 
-//   box-shadow: 0px 4px 4px 0px #000000;
+  box-shadow: 0px 4px 4px 0px #000000;
 
-//   border-radius: 2rem;
-//   background-color: #fff;
-// `;
+  border-radius: 2rem;
+  background-color: #fff;
+
+  > img {
+    width: 50%;
+    height: 50%;
+  }
+`;
 
 export default MainFunction;
