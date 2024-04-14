@@ -1,4 +1,4 @@
-export { default as IcPoliceLogo } from "./icons/Ic_policeLogo.svg";
+export { ReactComponent as IcPoliceLogo } from "./icons/Ic_policeLogo.svg";
 export { default as IcCallPolice } from "./icons/Ic_function_callPolice.svg";
 export { default as IcFingerPrint } from "./icons/Ic_function_fingerPrint.svg";
 export { default as IcMap } from "./icons/Ic_function_map.svg";
