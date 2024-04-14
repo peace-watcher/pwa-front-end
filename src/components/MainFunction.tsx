@@ -15,7 +15,32 @@ function MainFunction() {
   });
   const [isAllowNotification, setIsAllowNotification] = useState<boolean>(false);
 
-  async function handleAllowNotification() {
+  // async function handleAllowNotification() {
+  //   if (!("serviceWorker" in navigator)) {
+  //     alert("서비스 워커를 지원하지 않는 브라우저입니다.");
+  //     return;
+  //   }
+  //   const registration = await navigator.serviceWorker.ready;
+  //   if (!("pushManager" in registration)) {
+  //     alert("푸시 알림을 지원하지 않는 브라우저입니다.");
+  //     return;
+  //   }
+  //   const permission = await Notification.requestPermission();
+  //   console.log(permission);
+
+  //   registerServiceWorker();
+
+  //   const token = await getToken(messaging, {
+  //     vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
+  //   });
+  //   console.log("토큰", token);
+
+  //   setDeviceToken({
+  //     token: token,
+  //   });
+  // }
+
+  const requestNotificationPermission = async () => {
     if (!("serviceWorker" in navigator)) {
       alert("서비스 워커를 지원하지 않는 브라우저입니다.");
       return;
@@ -25,25 +50,34 @@ function MainFunction() {
       alert("푸시 알림을 지원하지 않는 브라우저입니다.");
       return;
     }
+
     const permission = await Notification.requestPermission();
     console.log(permission);
-    console.log("토큰", deviceToken.token);
+    if (permission === "granted") {
+      registerServiceWorker();
+      requestToken();
+    }
+  };
 
-    registerServiceWorker();
-
+  const requestToken = async () => {
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
     });
+    console.log("토큰", token);
+    setDeviceToken({ token: token });
+  };
 
-    setDeviceToken({
-      token: token,
-    });
+  // 사용자가 클릭할 때 호출할 함수를 별도로 만듭니다.
+  function handleUserClick() {
+    requestNotificationPermission();
   }
 
   useEffect(() => {
-    // 컴포넌트가 마운트되면 handleAllowNotification() 함수를 실행합니다.
-    handleAllowNotification();
-  }, []); // 두 번째 매개변수로 빈 배열을 전달하여 한 번만 실행되도록 합니다.
+    if (Notification.permission === "granted") {
+      setIsAllowNotification(true);
+      requestToken();
+    }
+  }, [Notification.permission]);
 
   useEffect(() => {
     deviceToken?.token !== "" && deviceToken?.token !== undefined && postDeviceToken(deviceToken?.token);
@@ -62,8 +96,10 @@ function MainFunction() {
   return (
     <>
       <StMainFunctionWrapper>
+        <button onClick={handleUserClick}>알림 허용</button>
         {isAllowNotification && <h1>허용됨 알림!!</h1>}
         {deviceToken.token && <h1>토큰: {deviceToken.token}</h1>}
+
         {IconList.map((Icon, idx: number) => {
           return (
             <StFunctionBoxWrapper key={IconDescList[idx]}>
