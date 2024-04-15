@@ -17,46 +17,11 @@ interface ILocation {
 function MainFunction() {
   const [dong, setDong] = useState<string>("");
   const [location, setLocation] = useState<ILocation>();
-  const { geolocation } = navigator;
-
-  const handleSuccess = (pos: GeolocationPosition) => {
-    const { latitude, longitude } = pos.coords;
-
-    setLocation({
-      latitude,
-      longitude,
-    });
-  };
 
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
   const [isAllowNotification, setIsAllowNotification] = useState<boolean>(false);
-
-  // async function handleAllowNotification() {
-  //   if (!("serviceWorker" in navigator)) {
-  //     alert("서비스 워커를 지원하지 않는 브라우저입니다.");
-  //     return;
-  //   }
-  //   const registration = await navigator.serviceWorker.ready;
-  //   if (!("pushManager" in registration)) {
-  //     alert("푸시 알림을 지원하지 않는 브라우저입니다.");
-  //     return;
-  //   }
-  //   const permission = await Notification.requestPermission();
-  //   console.log(permission);
-
-  //   registerServiceWorker();
-
-  //   const token = await getToken(messaging, {
-  //     vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
-  //   });
-  //   console.log("토큰", token);
-
-  //   setDeviceToken({
-  //     token: token,
-  //   });
-  // }
 
   const requestNotificationPermission = async () => {
     if (!("serviceWorker" in navigator)) {
@@ -89,7 +54,6 @@ function MainFunction() {
   // 사용자가 클릭할 때 호출할 함수를 별도로 만듭니다.
   function handleUserClick() {
     requestNotificationPermission();
-    geolocation.getCurrentPosition(handleSuccess);
   }
 
   useEffect(() => {
