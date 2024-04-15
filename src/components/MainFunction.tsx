@@ -9,7 +9,25 @@ import { AppCheckTokenResult } from "firebase/app-check";
 
 import { postDeviceToken } from "../api/postDeviceToken";
 
+interface ILocation {
+  latitude: number;
+  longitude: number;
+}
+
 function MainFunction() {
+  const [dong, setDong] = useState<string>("");
+  const [location, setLocation] = useState<ILocation>();
+  const { geolocation } = navigator;
+
+  const handleSuccess = (pos: GeolocationPosition) => {
+    const { latitude, longitude } = pos.coords;
+
+    setLocation({
+      latitude,
+      longitude,
+    });
+  };
+
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
@@ -70,7 +88,16 @@ function MainFunction() {
   // 사용자가 클릭할 때 호출할 함수를 별도로 만듭니다.
   function handleUserClick() {
     requestNotificationPermission();
+    geolocation.getCurrentPosition(handleSuccess);
   }
+
+  useEffect(() => {
+    if (location == undefined) {
+      setDong(" ");
+    } else {
+      setDong("현재 위치 : 신촌동");
+    }
+  }, [location]);
 
   useEffect(() => {
     if (Notification.permission === "granted") {
@@ -95,14 +122,11 @@ function MainFunction() {
 
   return (
     <>
+      <StLocationInfo>{dong}</StLocationInfo>
       <StMainFunctionWrapper>
-        <button onClick={handleUserClick}>알림 허용</button>
-        {isAllowNotification && <h1>허용됨 알림!!</h1>}
-        {deviceToken.token && <h1>토큰: {deviceToken.token}</h1>}
-
         {IconList.map((Icon, idx: number) => {
           return (
-            <StFunctionBoxWrapper key={IconDescList[idx]}>
+            <StFunctionBoxWrapper onClick={handleUserClick} key={IconDescList[idx]}>
               <img src={Icon} />
               {IconDescList[idx]}
             </StFunctionBoxWrapper>
@@ -112,6 +136,16 @@ function MainFunction() {
     </>
   );
 }
+
+const StLocationInfo = styled.p`
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  margin-left: 7.4rem;
+
+  font-weight: 2rem;
+  color: black;
+  align-self: flex-start;
+`;
 
 const StMainFunctionWrapper = styled.section`
   display: flex;
