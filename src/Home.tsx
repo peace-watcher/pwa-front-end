@@ -25,16 +25,16 @@ function Home() {
     });
   };
 
-  useEffect(() => {
-    geolocation.getCurrentPosition(handleSuccess);
-  }, []);
-
   if (loading) {
     return <SplashScreen />;
   } else {
     return (
       <>
-        <StHomeWraper>
+        <StHomeWraper
+          onClick={() => {
+            geolocation.getCurrentPosition(handleSuccess);
+          }}
+        >
           <Header />
           <MainFunction location={location} />
         </StHomeWraper>
