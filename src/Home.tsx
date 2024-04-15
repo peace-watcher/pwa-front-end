@@ -36,7 +36,7 @@ function Home() {
       <>
         <StHomeWraper>
           <Header />
-          <MainFunction />
+          <MainFunction location={location} />
         </StHomeWraper>
       </>
     );
