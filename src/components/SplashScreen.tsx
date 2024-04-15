@@ -26,14 +26,14 @@ const SplashContainer = styled.div`
   }
 `;
 
-const SplashScreen: React.FC = () => {
+function SplashScreen({ onClick }: { onClick: () => void }) {
   return (
-    <SplashContainer>
+    <SplashContainer onClick={onClick}>
       <h1>안전 Dream</h1>
       <IcPoliceLogo />
       <p>아동•여성•장애인 경찰지원센터</p>
     </SplashContainer>
   );
-};
+}
 
 export default SplashScreen;

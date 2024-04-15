@@ -26,15 +26,17 @@ function Home() {
   };
 
   if (loading) {
-    return <SplashScreen />;
+    return (
+      <SplashScreen
+        onClick={() => {
+          geolocation.getCurrentPosition(handleSuccess);
+        }}
+      />
+    );
   } else {
     return (
       <>
-        <StHomeWraper
-          onClick={() => {
-            geolocation.getCurrentPosition(handleSuccess);
-          }}
-        >
+        <StHomeWraper>
           <Header />
           <MainFunction location={location} />
         </StHomeWraper>
