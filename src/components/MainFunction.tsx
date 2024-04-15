@@ -71,6 +71,7 @@ function MainFunction() {
 
     const permission = await Notification.requestPermission();
     console.log(permission);
+    console.log(isAllowNotification);
     if (permission === "granted") {
       registerServiceWorker();
       requestToken();
