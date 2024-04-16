@@ -26,7 +26,7 @@ const SplashContainer = styled.button`
   }
 `;
 
-function SplashScreen({ onClick }: { onClick: () => void }) {
+function SplashScreen({ onClick }: { onClick?: () => void }) {
   return (
     <SplashContainer onClick={onClick}>
       <h1>안전 Dream</h1>

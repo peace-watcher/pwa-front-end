@@ -99,6 +99,9 @@ function MainFunction({ location }: { location: ILocation | undefined }) {
         <StButton onClick={closeModal}>아니오</StButton>
       </Modal>
       <StLocationInfo>{dong}</StLocationInfo>
+      <StLocationInfo>
+        {location?.latitude}, {location?.longitude}
+      </StLocationInfo>
       <StMainFunctionWrapper>
         {IconList.map((Icon, idx: number) => {
           return (
