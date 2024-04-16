@@ -15,13 +15,20 @@ interface ILocation {
   longitude: number;
 }
 
-function MainFunction({ location }: { location: ILocation | undefined }) {
+function MainFunction({
+  location,
+  handleSuccess,
+}: {
+  location: ILocation | undefined;
+  handleSuccess: (pos: GeolocationPosition) => void;
+}) {
   const [dong, setDong] = useState<string>("");
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); // Modal 상태 관리
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
+  const { geolocation } = navigator;
 
   // Modal을 열고 닫는 함수
   function closeModal() {
@@ -61,6 +68,7 @@ function MainFunction({ location }: { location: ILocation | undefined }) {
   function handleUserClick() {
     closeModal();
     requestNotificationPermission();
+    geolocation.getCurrentPosition(handleSuccess);
   }
 
   useEffect(() => {
