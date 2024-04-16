@@ -23,7 +23,7 @@ function Home() {
       return;
     }
 
-    geolocation.getCurrentPosition(handleSuccess, handleError, { timeout: 10000 });
+    geolocation.getCurrentPosition(handleSuccess, handleError, { timeout: 100000 });
   }, []);
 
   const handleSuccess = (pos: GeolocationPosition) => {
