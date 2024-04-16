@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IcPoliceLogo } from "../assets/index";
 
-const SplashContainer = styled.div`
+const SplashContainer = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
