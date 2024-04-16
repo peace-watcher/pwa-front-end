@@ -108,7 +108,7 @@ function MainFunction({
       </Modal>
       <StLocationInfo>{dong}</StLocationInfo>
       <StLocationInfo>
-        {location?.latitude}, {location?.longitude}
+        좌표 : ({location?.latitude}, {location?.longitude})
       </StLocationInfo>
       <StMainFunctionWrapper>
         {IconList.map((Icon, idx: number) => {
