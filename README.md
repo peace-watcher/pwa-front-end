@@ -1,4 +1,4 @@
-# Peace Watcehr pwa-front-end 
+# Peace Watcher pwa-front-end 
 Peace Watcher PWA(Progressive Web App) 레포지토리입니다.<br><br>
 
 ## 🪧 About Source Code
